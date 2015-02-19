@@ -70,22 +70,44 @@
 	var json = '';
     $(document).ready(function() {
         
-	$('#tableDefault').DataTable({
+	var table = $('#tableDefault').DataTable({
                 responsive: true
         });
+        
+         // Add event listener for opening and closing details
+    $('#tableDefault tbody').on('click', 'td.details-control', function () {
+        var tr = $(this).closest('tr');
+        var row = table.row( tr );
+		var rid = $(this).attr('id');
+		var childTable = $('#t'+rid).html();
+		
+        //alert(childTable);
+        if ( row.child.isShown() ) {
+            // This row is already open - close it
+            row.child.hide();
+            tr.removeClass('shown');
+        }
+        else {
+			
+            // Open this row
+            row.child( childTable ).show();
+            tr.addClass('shown');
+        }
+    } );
+    
 	
-	function setActive(uuid,table) {
-		 
-		$.post('<?php echo $activeApiLink; ?>/'+uuid+'/'+table,function(data){
-			if (data != 'error') {
-				
-			}
-		});
-	}
+		function setActive(uuid,table) {
+			 
+			$.post('<?php echo $activeApiLink; ?>/'+uuid+'/'+table,function(data){
+				if (data != 'error') {
+					
+				}
+			});
+		}
 	
     });
     </script>
-    
+      
 </head>
 
 <body>

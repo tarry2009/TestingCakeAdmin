@@ -3,30 +3,32 @@
           
         //print_r($aCtrlClasses);
 ?>
-                            <div class="dataTable_wrapper">
+                            <div class="table-responsive">
 								  
-								  <table class="table table-striped table-bordered table-hover" id="tableDefault">
+								  <table class="table table-striped  table-hover" id="tableDefault">
                                     <thead>
                                         <tr>
-                                            <th>Module</th>
+											
+                                            <th >Module</th>
                                              
-                                            <th align="center">Admin</th>
-                                            <th align="center">Register</th>
-                                            <th align="center">Public</th>
+                                            <th width="10%" align="center">Admin</th>
+                                            <th width="10%" align="center">Register</th>
+                                            <th width="10%" align="center">Public</th>
                                             
                                         </tr>
                                     </thead>
                                     <tbody>
-                                         
+
                                          <?php
                                             if(!empty($allRec)){
                                                 foreach($allRec as $k=>$v){
-													 
 									 
                                          ?>
                                         <tr class="gradeU">
-									  
-                                            <td><?php echo str_replace('Controller','',$k); ?></td>
+									   
+                                            <td id="<?php echo $k; ?>" class="details-control" >
+											<a aria-expanded="true" class=""> <?php echo str_replace('Controller','',$k); ?> </a>	
+											</td>
                                               
 											<td class="center" align="center" >
 												 
@@ -53,98 +55,72 @@
 											</td>
 											 
                                         </tr>
-                                        <table class="table table-striped table-bordered table-hover" >
-                                        <?php 
+                                       
+										 
+								     <?php
+												 
+                                            } //Ending Foreach 
+                                        } //Ending If
+                                        ?>
+                                    </tbody>
+                                </table>
+<div class="hide">
+                                      <?php
+                                            if(!empty($allRec)){
+                                                foreach($allRec as $k=>$v){
+									 
+                                      ?>
+                                      
+                                      <div id="t<?php echo $k; ?>" class=" table-responsive"> 
+											<table  class="table table-striped  " >
+											
+										<?php 
                                         foreach($v as $action){
 											
 										?>
 											
-											 <tr class="gradeU">
-									  
-                                            <td> <?php echo $action; ?> </td>
-                                              
-											<td class="center" align="center" >
+												<tr class="info" >
+										  
+												<td > <?php echo $action; ?> </td>
+												  
+												<td width="10%" class="center" align="center" >
+													 
+														<label>
+															<input name="adminacl" type="checkbox" value="Remember Me"> 
+														</label>
+													 
+												</td>
+												
+												<td width="10%" class="center" align="center">
+													 
+														<label>
+															<input name="registeracl" type="checkbox" value="Remember Me"> 
+														</label>
+													 
+												</td>
+												
+												<td width="10%" class="center" align="center">
+													 
+														<label>
+															<input name="publicacl" type="checkbox" value="Remember Me"> 
+														</label>
+													 
+												</td>
 												 
-													<label>
-														<input name="adminacl" type="checkbox" value="Remember Me"> 
-													</label>
-												 
-											</td>
+											</tr>
 											
-											<td class="center" align="center">
-												 
-													<label>
-														<input name="registeracl" type="checkbox" value="Remember Me"> 
-													</label>
-												 
-											</td>
+											<?php
+													} //Ending Actions process
+											?>
 											
-											<td class="center" align="center">
-												 
-													<label>
-														<input name="publicacl" type="checkbox" value="Remember Me"> 
-													</label>
-												 
-											</td>
-											 
-                                        </tr>
-                                        
-                                        <?php
-												} //Ending Actions process
-												?>
-												</table>
-												<?php
-                                            } //Ending Foreach 
-                                        } //Ending If
-                                        ?>
-                                        
-                                    </tbody>
-                                </table>
-                                
-                                
-								  
-								  <div id="mainPanel" class="row">
-                                  
-                                         <?php
-                                          
-                                            if(!empty($list)){
-                                                foreach($list as $k=>$v){
-                                                  	                               ?>
-                                        
-                                        
-                                        <div class="col-lg-4">
-                    <div class="panel panel-info">
-                        <div class="panel-heading">
-                            <?php 
-								echo $k; //str_replace("Controller",'', $v); 
-							?>
-                                             
-                        </div>
-                        <div class="panel-body">
-							
-                           <?php 
-                           
-								 
-                           ?>
-                           <ul>
-                           <?php if(!empty($v)) { foreach($v as $a) { ?>
-							   <li><?php echo $a; ?></li>
-							   <?php } } ?>
-                           </ul>
-                           
-                        </div>
-                        <div class="panel-footer">
-                            footer
-                        </div>
-                    </div>
-                </div>
-                
-                                        <?php
+											</table> </div>
+											
+											     <?php
 												 
                                             } //Ending Foreach 
                                         } //Ending If
                                         ?>
-                                    </tbody>
-                                </table>
+										</div>
+											
                             </div>
                            

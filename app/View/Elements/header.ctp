@@ -1,3 +1,9 @@
+        <?php
+			
+$settingsLink = $this->Html->url( array( "controller" => "settings", "action" => "index"));
+$aclLink = $this->Html->url( array( "controller" => "settings", "action" => "acl"));
+
+		  ?>
         <!-- Navigation -->
         <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
             <div class="navbar-header">
@@ -207,9 +213,9 @@
                         <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
-                        <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
+                        <li><a href="<?php echo $settingsLink; ?>"><i class="fa fa-user fa-fw"></i> User Profile</a>
                         </li>
-                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+                        <li><a href="<?php echo $settingsLink; ?>"><i class="fa fa-gear fa-fw"></i> Settings</a>
                         </li>
                         <li class="divider"></li>
 			<?php
@@ -255,12 +261,7 @@ $uploadApiLink = $this->Html->url( array( "controller" => "media", "action" => "
                             <a href="<?php echo $uploadApiLink; ?>"><i class="fa fa-upload"></i> Media<span class="fa arrow"></span></a>
                             
                         </li>
-                        <?php
-			
-$settingsLink = $this->Html->url( array( "controller" => "settings", "action" => "index"));
-$aclLink = $this->Html->url( array( "controller" => "settings", "action" => "acl"));
-
-		  ?>
+                       
                         <li>
                             <a href="#"><i class="fa fa-wrench fa-fw"></i>Settings <span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">

@@ -3,11 +3,11 @@
                                 <table class="table table-striped table-bordered table-hover" id="tableDefault">
                                     <thead>
                                         <tr>
-                                            <th>Id</th>
+                                           
                                             <th>Key Name</th>
                                             <th>Value</th>
-                                            <th>Status</th>
-                                            <th>Actions</th>
+                                            <th class="center" align="center" width="15%">Status</th>
+                                            <th class="center" align="center" width="15%" >Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -19,10 +19,10 @@
                                                  
                                          ?>
                                         <tr class="gradeU">
-                                            <td><?php echo $v['Setting']['id']; ?></td>
+                                           
                                             <td><?php echo $v['Setting']['key']; ?></td>
                                             <td><?php echo $v['Setting']['value']; ?></td>
-                                            <td class="center">
+                                            <td  class="center" align="center">
 <?php
 $activeLink = $this->Html->url( array(  "controller" => "restapi",
 "action" => "setstatus",
@@ -43,7 +43,7 @@ $idForDiv = $v['Setting']['id'];
 				       <?php } ?>
 						</div>   
 					    </td>
-                                            <td class="center">
+                                            <td class="center" align="center" >
 						     
 <?php
 $updateLink = $this->Html->url( array(  "controller" => "settings",
