@@ -1,10 +1,11 @@
+<div class="row-fluid"> 
 <?php
 			
 $uploadApiLink = $this->Html->url( array(  "controller" => "media", "action" => "index"));
  
 $deleteLinkNew = $this->Html->url( array("controller" => "restapi", "action" => "delete"));
 $otherFile = $this->base.'/img/otherfile.jpg';
-	  
+	  	  
 		  echo $this->Form->create('Document', array('enctype' => 'multipart/form-data') ); ?>
 			   
    <?php echo $this->Form->create('media', array('id'=>'media','role'=>'form', 'action'=>'mediaup') ); ?>
@@ -12,14 +13,15 @@ $otherFile = $this->base.'/img/otherfile.jpg';
 <?php echo $this->Session->flash(); ?>
 			
 			   <?php echo $this->Form->file( 'yourfile',array('class'=>' inputText', 'div' => false,'label' => false) ); ?>
-			   <div id="loader">
-			      <img src="<?php echo $this->base; ?>/app/webroot/img/loading.gif">
+			   <div id="loader" class="span4 pull-right">
+			      <img src="<?php echo $this->base; ?>/app/webroot/img/loading.gif" width="50">
 			   </div>
 			   <?php echo $this->Form->end();?>
 			       
 				 <br>
 				 <hr>
 				 <br>
+				 </div>
                             <div class="dataTable_wrapper">
                                   <div id="mainPanel" class="row">
                                              
@@ -35,10 +37,10 @@ $otherFile = $this->base.'/img/otherfile.jpg';
                                         				 
       
 					 
-				<div class="col-lg-4">
+				<div class="col-lg-4 " align="top">
                    
-                             <a  href="<?php echo $v['File']['file_path']; ?>" data-lightbox="AllMedia" data-title="<?php echo $v['File']['original_name']; ?>">
-								<img src="<?php echo  ($exact_type[0]=='image') ? $v['File']['file_path'] : $otherFile; ?>" class="img-thumbnail"    >
+                             <a  href="<?php echo $this->base.'/app/webroot/files/'.$v['File']['file_name']; ?>" data-lightbox="AllMedia" data-title="<?php echo $v['File']['original_name']; ?>">
+								<img src="<?php echo  ($exact_type[0]=='image') ? $this->base.'/app/webroot/files/thumbs/'.$v['File']['file_name'] : $otherFile; ?>" class="img-thumbnail"    >
 							</a>
 
                        
@@ -46,7 +48,7 @@ $otherFile = $this->base.'/img/otherfile.jpg';
 								 <i class="fa fa-times"></i>
 								 </a>
                              
-                        
+                        <br><br>
                
 		</div>
 			    
@@ -63,9 +65,9 @@ $otherFile = $this->base.'/img/otherfile.jpg';
                      
         <div id="allfiles" class="dataTable_wrapper hide">
 					 
-				<div class="col-lg-4">
+				<div class="col-lg-4 " align="top">
                 
-                            <a id="imageLink" href="" data-lightbox="image-1" data-title="My caption">
+                            <a id="imageLink" href="" data-lightbox="AllMedia" data-title="My caption">
 							<img id="imageSrc" src="" class="img-thumbnail" >
 							</a>
 
@@ -73,7 +75,7 @@ $otherFile = $this->base.'/img/otherfile.jpg';
                              <a id="del" class="btn btn-default btn-circle btn-danger" href="#" onclick="return confirm('Are you sure, you wish to delete this recipe?');">
 							 <i class="fa fa-times"></i>
 							 </a>
-                         
+                         <br><br>
                 </div>
 		</div>
 			    
@@ -84,24 +86,27 @@ $otherFile = $this->base.'/img/otherfile.jpg';
 $(document).ready(function() {
    
    $('#loader').hide();
-   
+   var filepath = "<?php echo $this->base; ?>/app/webroot/files/";
     $('input[type=file]').change(function() {
+		 
 		$('#loader').show();
 		$(this).upload('<?php echo $uploadApiLink; ?>', function(data) { 
 			var res = $.parseJSON(data);
 			
-			$('#imageLink').attr('href',res.file_path);
+			$('#imageLink').attr('href',filepath+res.file_name);
 			
 			if(res.type == 'image')
-			$('#imageSrc').attr('src', res.file_path);
-			else
-			$('#imageSrc').attr('src', '<?php echo $otherFile; ?>');
-			 
+			$('#imageSrc').attr('src', filepath+''+res.thumb);
+			else{
+				$('#imageSrc').attr('src', '<?php echo $otherFile; ?>');
+				 
+			}
 			$('#del').attr('href', '<?php echo $deleteLinkNew; ?>/'+res.uuid+'/File');
 			  
 			
 			$('#mainPanel').append($('#allfiles').html());
 			$('#loader').hide();
+		 
 		});
 	});
 	

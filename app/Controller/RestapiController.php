@@ -8,6 +8,7 @@
 
 class RestapiController extends AppController {
  
+	
     public function beforeFilter() {
         parent::beforeFilter();
 	$this->layout = 'ajax';
@@ -77,7 +78,10 @@ class RestapiController extends AppController {
 		
 		$this->layout = 'admin';
 		$returnPath = $_SERVER['HTTP_REFERER'];
-		  
+		
+		if(empty($returnPath))
+			$returnPath = 'http://localhost/CakeAdmin/users';
+			
 		//Getting list of all models
 		$allModelNames = App::objects('model');
 		
@@ -88,11 +92,11 @@ class RestapiController extends AppController {
  			
 			if(!$this->$table->exists()) {
 				$this->Session->setFlash(__('The record id is not valid.'), 'error');
-				$this->redirect($retPath);
+				$this->redirect($returnPath);
 			}
 		}else{
 			$this->Session->setFlash(__('Something is wrong.'), 'error');
-			$this->redirect($retPath);
+			$this->redirect($returnPath);
 		}
 
 		if($table == 'User'){
@@ -102,12 +106,11 @@ class RestapiController extends AppController {
 				$this->redirect($returnPath);
 			}
 		}
-		
-		
-		
+		 
         if($table=='File'){
 			$this->data =  $this->$table->read(null,  $this->$table->id);
-			unlink($this->data['File']['file_path']);
+			@unlink($this->data['File']['file_path']);
+			@unlink(str_replace('files/','files/thumbs/',$this->data['File']['file_path']));
 		}	
 		
         if ($this->$table->delete()) {
